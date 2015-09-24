@@ -1,17 +1,19 @@
-Files that I am working on
+#Files that I am working on
 
-to access the first page. ( I am using Bitnami setup for laravel. I just started using the default code and making changes to it.)<br>
+( I am using Bitnami setup for laravel. I just started using the default code and making changes to it. Therefore there are lot of unecessary files.)
+
+to access the first page. <br>
 http://127.0.0.1/index.php<br>
 
 Significant files<br>
 
-View
-resources/views/welcome.blade.php
+View<br>
+resources/views/welcome.blade.php<br>
 
-Controllers
-app\Http\Controllers\ImageUploadController.php
-app\Http\Controllers\SchedulerController.php
+Controllers<br>
+app\Http\Controllers\ImageUploadController.php<br>
+app\Http\Controllers\SchedulerController.php<br>
 
 
-Image Upload location
-public/uploads
+Image Upload location<br>
+public/uploads<br>
