@@ -1,0 +1,30 @@
+<?php namespace App\Http\Controllers;
+
+use Illuminate\Http\Request;
+use Illuminate\Http\Response;
+use Validator;
+
+class ImageUploadController extends Controller {
+	public function upload( Request $request ) {
+
+		$file = array('image' => $request->file('image'));
+		$fileName = '';
+		$validator = Validator::make(
+            $file, array('image'  => 'required')
+        );
+        if ( $validator->fails() ) {
+
+        } else {
+			if ($request->file('image')->isValid()) {
+				$destinationPath =  public_path() . '/uploads/'; // upload path
+      			$extension = $request->file('image')->getClientOriginalExtension(); // getting image extension
+      			$fileName = rand(11111,99999).'.'.$extension; // renameing image
+
+      			$request->file('image')->move($destinationPath, $fileName); // uploading file to given path
+
+			}
+        }
+        //return Response::json(array('filename' => $fileName));
+        return $arrayName = array('filename' => $fileName );
+	}
+}
