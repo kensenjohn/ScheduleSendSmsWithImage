@@ -14,6 +14,7 @@
 Route::get('/', 'WelcomeController@index');
 Route::get('hello', 'WelcomeController@index');
 Route::post('upload_image', 'ImageUploadController@upload');
+Route::post('save_schedule', 'SchedulerController@save');
 
 //Route::get('home', 'HomeController@index');
 

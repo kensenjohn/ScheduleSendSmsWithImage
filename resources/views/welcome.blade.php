@@ -10,12 +10,6 @@
 		{!! Html::style('css/default.date.css') !!}
 		{!! Html::style('css/default.time.css') !!}
 
-		<!-- <link rel="stylesheet" href="/pickadate.js/css/main.css">
-		<link rel="stylesheet" href="/pickadate.js/vendor/pickadate/lib/themes/default.css" id="theme_base">
-		<link rel="stylesheet" href="/pickadate.js/vendor/pickadate/lib/themes/default.date.css" id="theme_date">
-		<link rel="stylesheet" href="/pickadate.js/vendor/pickadate/lib/themes/default.time.css" id="theme_time">  -->
-
-		<!-- Optional theme -->
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
 
 
@@ -34,18 +28,7 @@
 		</style>
 	</head>
 	<body  class="container">
-		<!-- <div class="container">
-			<div class="content">
-				<div class="title">Kensen John: Laravel 5</div>
-				<div class="quote">{{ Inspiring::quote() }}</div>
-				<form>pload
-				      <SELECT>
-				      	<OPTION>Hello</OPTION>
-				      	<OPTION>There</OPTION>
-				      </SELECT>
-				</form>
-			</div>
-		</div> -->
+		
 		<div class="row">
 		  <div class="col-md-12"><h1>Upload Image</h1></div>
 		</div>
@@ -94,7 +77,7 @@
 		<div class="row">
 		  <div class="col-md-12">
 			  
-		  	{!! Form::open(array('url' => 'save_schedule', 'method' => 'post', 'class' => 'form-horizontal' )) !!}
+		  	{!! Form::open(array( 'method' => 'post', 'class' => 'form-horizontal', 'id' => 'frm_save_schedule' )) !!}
 			  	<div class="row">
 				  <div class="col-md-3">
 				   		{!! Form::label('schedule_date', 'Date', array('class' => 'control-label')) !!}
@@ -126,6 +109,17 @@
 						{!! Form::button('Submit', array('class' => 'control-label', 'id' => 'btn_schedule_post', 'class' => 'btn btn-default' )) !!} 
 		  			</div>
 		  		</div>
+		  		<div class="row">
+				  <div class="col-md-12">
+				  	&nbsp;
+				  </div>
+				</div>
+		  		 <div class="row">                   
+                    <div class="col-md-12">
+                        <label class="form_label">&nbsp;</label>
+                        <div id="save_schedule_status"></div>
+                    </div>
+                </div>
 		  		{!! Form::hidden( 'uploaded_filename' , '' , $attributes =  array('id' => 'uploaded_filename' ) ) !!}
 			{!! Form::close() !!}
 		  </div>
@@ -147,7 +141,10 @@
     		$( "#schedule_time" ).pickatime();
   		
     		$('#btn_schedule_post').on('click', function(){
-    			console.log('Clicked Schedule Post');
+    			var actionUrl = "index.php/save_schedule";
+		        var methodType = "POST";
+		        var dataString = $('#frm_save_schedule').serialize();
+		        makeAjaxCall(actionUrl,dataString,methodType,finalizeSchedule);
     		});
     	});
 
@@ -172,6 +169,7 @@
 	            add: function (e, data) {
 	                $('#btn_upload_file').unbind('click');
 	                $('#progress_status').text('');
+	                $('#save_schedule_status').text('');
 	                data.context = $('#btn_upload_file').click(function () {
 	                    $('#progress_status').text('Processing ...');
 	                    data.submit();
@@ -200,6 +198,22 @@
 	            }
 	     	});
     	});
+
+
+		function finalizeSchedule(jsonResult) {
+			if( jsonResult!= undefined ) {
+				$('#save_schedule_status').text(jsonResult.message);
+
+				// Resetting the form.
+				if( jsonResult.result == true ) {
+					$('#schedule_date').val('');
+					$('#schedule_time').val('');
+					$('#uploaded_filename').val('');
+					$('#phone_num').val('');
+				}
+			}	
+			
+		}
 
     </script>
 </html>
