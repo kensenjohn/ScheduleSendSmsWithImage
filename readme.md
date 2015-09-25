@@ -14,9 +14,21 @@ Controllers<br>
 app\Http\Controllers\ImageUploadController.php<br>
 app\Http\Controllers\SchedulerController.php<br>
 
+Backend Command Line Script<br>
+app/Command/Console/SendSms.php<br>
+
 
 Image Upload location<br>
 public/uploads<br>
+
+Include cacert.pem to php.ini<br>
+ For Twilio to work you need to include cacert.pem so that php has access to it. I have included a copy in Github.<br>
+   Download cacert.pem to your local machine. Then include the path in php.ini. (the parameter already exists. Uncomment it, and include correct path)<br>
+      
+
+        curl.cainfo = C:\Bitnami\wampstack-5.5.29-1\frameworks\laravel\cacert.pem
+
+
 
 
 
