@@ -95,8 +95,8 @@
 				</div>
 				<div class="row">
 				  <div class="col-md-3">
-				   		{!! Form::label('phone_num', 'Phone Number', array('class' => 'control-label')) !!}
-				   		{!! Form::text( 'phone_num' , '' , $attributes =  array('class' => 'form-control', 'placeholder' => '(xxx) xxx-xxxx' )) !!}
+				   		{!! Form::label('phone_num', 'Phone Number (xxx-xxx-xxxx)', array('class' => 'control-label')) !!}
+				   		{!! Form::text( 'phone_num' , '' , $attributes =  array('class' => 'form-control', 'placeholder' => 'xxx-xxx-xxxx' )) !!}
 				   </div>
 				</div>
 				<div class="row">
@@ -138,7 +138,7 @@
 	<script   type="text/javascript">
     	$(window).load(function() {
     		$( "#schedule_date" ).pickadate();
-    		$( "#schedule_time" ).pickatime();
+    		$( "#schedule_time" ).pickatime( {interval: 15} );
   		
     		$('#btn_schedule_post').on('click', function(){
     			var actionUrl = "index.php/save_schedule";
